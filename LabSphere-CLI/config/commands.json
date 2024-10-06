@@ -1,0 +1,11 @@
+{
+    "ls": "dir",
+    "pwd": "cd",
+    "nasa radar fetch": "python fetch_nasa_radar_data.py",
+    "run python": "python",
+    "run c": "gcc",
+    "run cpp": "g++",
+    "run java": "javac",
+    "exit": "exit"
+  }
+  

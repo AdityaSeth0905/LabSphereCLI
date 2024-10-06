@@ -1,0 +1,7 @@
+version: '1.0.0'
+services:
+  lab_sphere_cli:
+    build: .
+    volumes:
+      - .:/app
+    command: ./LabSphereCLI

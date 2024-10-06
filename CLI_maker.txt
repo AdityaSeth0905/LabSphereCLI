@@ -1,0 +1,41 @@
+cmake_minimum_required(VERSION 3.10)
+
+# Project name and version
+project(LabSphereCLI VERSION 1.0)
+
+# Set the C++ standard
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+# Add source files
+set(SOURCES
+    src/main.cpp
+    src/commands.cpp
+    src/sensor_data.cpp
+    src/kafka_integration.cpp
+    src/run_compiler.cpp
+)
+
+# Add header files
+include_directories(include)
+
+# Find required packages
+find_package(Boost REQUIRED)
+find_package(ncurses REQUIRED)
+find_package(CppRestSdk REQUIRED)
+
+# Add executable
+add_executable(LabSphereCLI ${SOURCES})
+
+# Link necessary libraries
+target_link_libraries(LabSphereCLI
+    Boost::boost
+    ncurses
+    cpprest
+    librdkafka
+)
+
+# Output binaries to bin folder
+set_target_properties(LabSphereCLI PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin
+)

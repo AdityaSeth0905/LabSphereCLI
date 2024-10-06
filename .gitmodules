@@ -1,0 +1,3 @@
+[submodule "LabSphere-CLI/third_party/vcpkg"]
+	path = LabSphere-CLI/third_party/vcpkg
+	url = https://github.com/microsoft/vcpkg.git

@@ -1,0 +1,49 @@
+# Compiler and flags
+CXX = g++
+CXXFLAGS = -std=c++17 -Wall -Iinclude
+
+# Directories
+SRC_DIR = src
+BIN_DIR = bin
+INCLUDE_DIR = include
+THIRD_PARTY_DIR = third_party
+COMPILERS_DIR = compilers
+CONFIG_DIR = config
+
+# Executable
+TARGET = $(BIN_DIR)/LabSphereCLI.exe
+
+# Source files
+SRCS = $(wildcard $(SRC_DIR)/*.cpp)
+
+# Object files
+OBJS = $(SRCS:$(SRC_DIR)/%.cpp=$(BIN_DIR)/%.o)
+
+# Libraries (Kafka, Boost, etc.)
+LIBS = -L$(THIRD_PARTY_DIR)/kafka -lrdkafka
+
+# Default task
+all: $(TARGET)
+
+# Linking object files to create the executable
+$(TARGET): $(OBJS)
+	@echo "Linking..."
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LIBS)
+	@echo "Build complete!"
+
+# Compiling source files
+$(BIN_DIR)/%.o: $(SRC_DIR)/%.cpp $(INCLUDE_DIR)/%.hpp
+	@mkdir -p $(BIN_DIR)
+	@echo "Compiling $<..."
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+# Clean up
+clean:
+	@echo "Cleaning up..."
+	rm -rf $(BIN_DIR)/*.o $(TARGET)
+	@echo "Clean complete!"
+
+# Rebuild the entire project
+rebuild: clean all
+
+.PHONY: all clean rebuild
